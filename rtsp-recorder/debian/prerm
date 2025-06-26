@@ -1,0 +1,8 @@
+#!/bin/bash
+set -e
+
+# Stop and disable service
+systemctl stop rtsp-recorder.service || true
+systemctl disable rtsp-recorder.service || true
+
+#DEBHELPER#

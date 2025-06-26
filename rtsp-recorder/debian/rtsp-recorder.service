@@ -1,0 +1,15 @@
+[Unit]
+Description=RTSP Video Recorder
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/recording.sh
+WorkingDirectory=/var/lib/rtsp-recorder
+User=rtsp-recorder
+Group=rtsp-recorder
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,19 @@
+#!/bin/bash
+set -e
+
+# Create user and group
+adduser --system --group --home /var/lib/rtsp-recorder rtsp-recorder
+
+# Create working directory
+mkdir -p /var/lib/rtsp-recorder
+chown rtsp-recorder:rtsp-recorder /var/lib/rtsp-recorder
+
+# Create config directory
+mkdir -p /etc/starwit/rtsp-recorder
+
+# Enable and start service
+systemctl daemon-reload
+systemctl enable rtsp-recorder.service
+systemctl stop rtsp-recorder.service
+
+#DEBHELPER#

@@ -1,0 +1,3 @@
+rtsp-recorder/recording.sh usr/bin
+debian/rtsp-recorder.service lib/systemd/system
+rtsp-recorder/env.sh /etc/starwit/rtsp-recorder

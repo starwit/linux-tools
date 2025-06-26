@@ -1,0 +1,12 @@
+Source: rtsp-recorder
+Section: video
+Priority: optional
+Maintainer: Markus Zarbock <foss@starwit.de>
+Build-Depends: debhelper (>= 11)
+Standards-Version: 4.1.3
+
+Package: rtsp-recorder
+Architecture: all
+Depends: ffmpeg, systemd
+Description: RTSP video recorder service
+ Records RTSP video streams as MP4 files with timestamped filenames.
