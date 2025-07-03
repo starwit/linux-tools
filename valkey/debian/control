@@ -1,0 +1,14 @@
+Source: valkey-server
+Section: utils
+Priority: optional
+Maintainer: Markus Zarbock <foss@starwit.de>
+Build-Depends: debhelper (>= 11)
+Standards-Version: 4.6.0
+Homepage: https://starwit.de
+
+Package: valkey-server
+Architecture: ###ARCH###
+Depends: ${misc:Depends}
+Description: Valkey Server
+ Debian package, to run Valkey server as a SystemD service. 
+ Tested on Ubuntu 22.04.

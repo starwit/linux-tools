@@ -1,0 +1,28 @@
+#!/bin/bash
+set -e
+
+PACKAGE_NAME=valkey
+
+if [ "$1" = "remove" ] || [ "$1" = "purge" ]; then
+
+    # Stop the service
+    systemctl stop ${PACKAGE_NAME}.service
+
+    # Disable the service
+    systemctl disable ${PACKAGE_NAME}.service
+
+    # Remove the service file
+    rm -f /lib/systemd/system/$PACKAGE_NAME.service
+
+    systemctl daemon-reload
+    
+    # Remove application directory
+    rm -rf /opt/$PACKAGE_NAME
+
+    # Remove config files directory
+    rm -rf /etc/$PACKAGE_NAME
+fi
+
+#DEBHELPER#
+
+exit 0

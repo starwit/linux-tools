@@ -1,0 +1,16 @@
+[Unit]
+Description=Valkey Service
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/valkey
+ExecStart=/opt/valkey/bin/valkey-server /etc/valkey/valkey.conf
+Restart=always
+RestartSec=5
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=valkey
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,11 @@
+#!/bin/bash
+set -e
+
+PACKAGE_NAME=valkey
+
+if [ "$1" = "configure" ]; then
+    systemctl daemon-reload
+
+    systemctl start ${PACKAGE_NAME}.service
+fi
+

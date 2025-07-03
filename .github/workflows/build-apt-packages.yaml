@@ -1,0 +1,44 @@
+name: Build and release latest APT package
+
+on:
+  workflow_dispatch:
+  pull_request:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: package APT
+    runs-on: [self-hosted, linux, X64]
+    container:
+        image: starwitorg/debian-packaging:0.0.2
+        env:
+          PASSPHRASE: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD_FLAT }}
+          GPG_KEY: ${{ secrets.OSSRH_GPG_SECRET_KEY_B64 }}          
+        volumes:
+            - ./:/code
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: build RTSP recorder package
+        run: |
+            export PATH=/root/.local/bin/:$PATH
+            bash -c ./make build_deb
+
+      - name: build Valkey service package
+        run: |
+            export PATH=/root/.local/bin/:$PATH
+            export ARCH=amd64
+            bash -c ./build_package.sh
+            export ARCH=arm64
+            bash -c ./build_package.sh
+
+      # - name: create release
+      #   run: |
+      #    echo "Releasing package with version ${VERSION}"
+      #    find ./target
+      #    gh release create ${VERSION} --title "${VERSION}" ./target/*deb ./target/*.dsc
+      #   env:
+      #     GH_TOKEN: ${{ github.token }}

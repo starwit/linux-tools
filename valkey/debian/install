@@ -1,0 +1,3 @@
+debian/valkey.service /lib/systemd/system
+debian/valkey.conf /etc/valkey
+debian/opt/valkey-server /opt/valkey
