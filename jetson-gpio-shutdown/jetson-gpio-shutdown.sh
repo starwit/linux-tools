@@ -13,15 +13,21 @@ TIMEOUT_SECONDS=${TIMEOUT_SECONDS:-30}  # Default timeout in seconds
 
 # Main loop
 counter=0
+last_value=""
 while true; do
     value=$(gpioget gpiochip0 "$GPIO_PIN")
     if [ "$value" -eq 0 ]; then
         counter=$((counter + 1))
-        echo "GPIO $GPIO_PIN is high, counter: $counter"
+        if [ "$last_value" != "0" ]; then
+            echo "GPIO $GPIO_PIN is high, counter: $counter"
+        fi
     else
+        if [ "$last_value" != "1" ]; then
+            echo "GPIO $GPIO_PIN is low, resetting counter."
+        fi
         counter=0
-        echo "GPIO $GPIO_PIN is low, resetting counter."
     fi
+    last_value="$value"
 
     if [ "$counter" -ge "$TIMEOUT_SECONDS" ]; then
         echo "GPIO $GPIO_PIN high for $TIMEOUT_SECONDS seconds, shutting down."
