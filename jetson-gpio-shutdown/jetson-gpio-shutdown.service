@@ -4,7 +4,7 @@ After=multi-user.target
 
 [Service]
 Type=simple
-ExecStart=/home/florian/workspaces/infra/linux-tools/jetson-shutdown/jetson-gpio-shutdown.sh
+ExecStart=/opt/jetson-gpio-shutdown/jetson-gpio-shutdown.sh
 Restart=always
 User=root
 
