@@ -1,5 +1,12 @@
 #!/bin/bash
 
+sudo systemctl disable --now jetson-gpio-shutdown.service
+
+# Remove old files (keep config)
+sudo rm -f /etc/systemd/system/jetson-gpio-shutdown.service
+sudo rm -rf /opt/jetson-gpio-shutdown
+
+# Copy new service and script files
 sudo mkdir -p /opt/jetson-gpio-shutdown
 sudo cp jetson-gpio-shutdown.sh /opt/jetson-gpio-shutdown/
 sudo cp jetson-gpio-shutdown.service /etc/systemd/system/
