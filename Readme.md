@@ -21,3 +21,7 @@ A script and a systemd timed service to automatically shut down a machine if it 
 
 ### connection-monitor
 A bash script to monitor network connectivity using configurable check methods (ICMP, HTTP).
+
+### jetson-gpio-shutdown
+A script and systemd service to automatically shut down a Jetson device if a configured GPIO pin is low for a configurable amount of time.
+See [jetson-gpio-shutdown/Readme.md](jetson-gpio-shutdown/Readme.md) for installation and usage instructions.
