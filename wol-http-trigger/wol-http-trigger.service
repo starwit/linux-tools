@@ -1,0 +1,11 @@
+[Unit]
+Description=Wake-on-LAN HTTP trigger service
+After=network.target
+
+[Service]
+ExecStart=python3 PATH_TO_SERVER_SCRIPT
+Type=exec
+Restart=always
+
+[Install]
+WantedBy=default.target

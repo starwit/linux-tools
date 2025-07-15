@@ -1,0 +1,6 @@
+[Unit]
+Description=Check for automatic shutdown conditions
+
+[Service]
+ExecStart=/etc/auto-shutdown/auto-shutdown.sh
+Type=oneshot
