@@ -16,13 +16,13 @@ counter=0
 last_value=""
 while true; do
     value=$(gpioget gpiochip0 "$GPIO_PIN")
-    if [ "$value" -eq 0 ]; then
+    if [ "$value" -eq 1 ]; then
         counter=$((counter + 1))
-        if [ "$last_value" != "0" ]; then
+        if [ "$last_value" != "1" ]; then
             echo "GPIO $GPIO_PIN is high, shutting down in $TIMEOUT_SECONDS seconds."
         fi
     else
-        if [ "$last_value" != "1" ]; then
+        if [ "$last_value" != "0" ]; then
             echo "GPIO $GPIO_PIN is low, resetting timeout."
         fi
         counter=0
