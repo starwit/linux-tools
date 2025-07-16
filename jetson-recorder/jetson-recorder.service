@@ -9,8 +9,6 @@ Type=simple
 ExecStart=/bin/bash /opt/jetson-recorder/jetson-recorder.sh
 Restart=always
 User=root
-StandardOutput=journal+console
-StandardError=journal+console
 
 [Install]
 WantedBy=multi-user.target
