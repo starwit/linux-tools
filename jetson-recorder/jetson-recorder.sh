@@ -10,9 +10,13 @@ fi
 # Prepare timestamp variable for filenames
 TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S")
 
-# Placeholder for recording logic
-# Example: LOGFILE="/some/path/recording_$TIMESTAMP.log"
-# touch "$LOGFILE"
+# Ensure output directory exists
+mkdir -p "${OUTPUT_PATH}"
 
+# Record video and GPS data with a common timestamp
 ffmpeg -i rtsp://${USERNAME}:${PASSWORD}@${CAMERA_URL} -c copy "${OUTPUT_PATH}/${TIMESTAMP}_video.mkv" &
-socat /dev/ttyUSB1,raw,echo=0 - > "${OUTPUT_PATH}/${TIMESTAMP}_gps.log"
+
+# Record GPS data from a serial device (e.g., /dev/ttyUSB1), add a timestamp to each line and skip empty lines
+socat /dev/ttyUSB1,raw,echo=0 - | while IFS= read -r line; do
+    [ -n "$line" ] && echo "$(date --iso=ns) $line"
+done > "${OUTPUT_PATH}/${TIMESTAMP}_gps.log"
