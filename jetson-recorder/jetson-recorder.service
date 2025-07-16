@@ -6,7 +6,7 @@ Wants=time-sync.target
 
 [Service]
 Type=simple
-ExecStart=/opt/jetson-recorder/jetson-recorder.sh
+ExecStart=/bin/bash /opt/jetson-recorder/jetson-recorder.sh
 Restart=always
 User=root
 
