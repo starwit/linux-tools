@@ -26,4 +26,6 @@ GPS_PID=$!
 echo "Recording started. FFMPEG PID: $FFMPEG_PID, GPS_PID: $GPS_PID"
 
 # Wait for one of the processes to finish
-wait -n $FFMPEG_PID $GPS_PID
+wait -p job_id -n $FFMPEG_PID $GPS_PID
+
+echo "Job $job_id exited. Stopping recording."
