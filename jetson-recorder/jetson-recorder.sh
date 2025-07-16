@@ -18,7 +18,7 @@ ffmpeg -i rtsp://${USERNAME}:${PASSWORD}@${CAMERA_URL} -c copy -nostats "${OUTPU
 FFMPEG_PID=$!
 
 # Record GPS data from a serial device (e.g., /dev/ttyUSB1), add a timestamp to each line and skip empty lines
-socat /dev/ttyUSB1,raw,echo=0 - | while IFS= read -r line; do
+socat -u /dev/ttyUSB1,raw,echo=0 - | while IFS= read -r line; do
     [ -n "$line" ] && echo "$(date --iso=ns);$line"
 done > "${OUTPUT_PATH}/${TIMESTAMP}_gps.log" &
 GPS_PID=$!
