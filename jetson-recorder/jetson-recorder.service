@@ -1,0 +1,12 @@
+[Unit]
+Description=Jetson Recorder Service
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/opt/jetson-recorder/jetson-recorder.sh
+Restart=always
+User=root
+
+[Install]
+WantedBy=multi-user.target
