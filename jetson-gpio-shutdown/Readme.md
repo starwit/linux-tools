@@ -38,7 +38,7 @@ GPIO_PIN=105
 TIMEOUT_SECONDS=30
 ```
 
-- `GPIO_PIN`: The GPIO pin number to monitor (default: 105)
+- `GPIO_PIN`: The GPIO pin number to monitor (default: 105 == DI1 on reComputer Industrial Orin NX 8GB)
 - `TIMEOUT_SECONDS`: Seconds the pin must remain low before shutdown (default: 30)
 
 After changing the config, restart the service:

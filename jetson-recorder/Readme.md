@@ -7,6 +7,8 @@ A script and systemd service to automatically start a recording process on boot.
 ```sh
 cd jetson-recorder
 sudo ./install_service.sh
+# Edit /etc/jetson-recorder.conf and set configuration options, then restart the service
+sudo systemctl restart jetson-recorder.service
 ```
 
 ## Update

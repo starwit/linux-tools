@@ -25,3 +25,7 @@ A bash script to monitor network connectivity using configurable check methods (
 ### jetson-gpio-shutdown
 A script and systemd service to automatically shut down a Jetson device if a configured GPIO pin is low for a configurable amount of time.
 See [jetson-gpio-shutdown/Readme.md](jetson-gpio-shutdown/Readme.md) for installation and usage instructions.
+
+### jetson-recorder
+A script and systemd service to automatically record video and GPS data from an IP camera and serial device on boot.
+See [jetson-recorder/Readme.md](jetson-recorder/Readme.md) for installation and usage instructions.
