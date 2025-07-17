@@ -9,10 +9,11 @@ Type=simple
 ExecStart=/bin/bash /opt/jetson-recorder/jetson-recorder.sh
 Restart=always
 RestartSec=2
-RestartSteps=10
-RestartMaxDelaySec=30
 StartLimitBurst=20
 User=root
+# These only work in systemd>=254
+RestartSteps=10
+RestartMaxDelaySec=30
 
 [Install]
 WantedBy=multi-user.target
