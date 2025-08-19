@@ -14,10 +14,9 @@ sudo cp jetson-recorder.service /etc/systemd/system/
 # Install default config if not present
 if [ ! -f /etc/jetson-recorder.conf ]; then
     sudo bash -c 'cat > /etc/jetson-recorder.conf <<EOF
-USERNAME=username
-PASSWORD=password
-CAMERA_URL=127.0.0.1:8554
-OUTPUT_PATH=/tmp/recordings
+RTSP_URL=rtsp://username:password@127.0.0.1:8554            # Camera RTSP URL
+OUTPUT_PATH=/tmp/recordings                                 # Path where all recorded files will be stored
+NMEA_READ_COMMAND=gpspipe -r                                # Command that outputs NMEA sentences
 EOF'
 fi
 

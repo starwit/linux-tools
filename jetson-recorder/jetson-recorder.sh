@@ -14,11 +14,11 @@ TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S")
 mkdir -p "${OUTPUT_PATH}"
 
 # Record video and GPS data with a common timestamp
-ffmpeg -i rtsp://${USERNAME}:${PASSWORD}@${CAMERA_URL} -c copy -nostats "${OUTPUT_PATH}/${TIMESTAMP}_video.mkv" 2> "${OUTPUT_PATH}/${TIMESTAMP}_ffmpeg.log" &
+ffmpeg -i "${RTSP_URL}" -c copy -nostats "${OUTPUT_PATH}/${TIMESTAMP}_video.mkv" 2> "${OUTPUT_PATH}/${TIMESTAMP}_ffmpeg.log" &
 FFMPEG_PID=$!
 
 # Record GPS data from a serial device (e.g., /dev/ttyUSB1), add a timestamp to each line and skip empty lines
-socat -u /dev/ttyUSB1,raw,echo=0 - | while IFS= read -r line; do
+eval "${NMEA_READ_COMMAND}" | while IFS= read -r line; do
     [ -n "$line" ] && echo "$(date --iso=ns);$line"
 done > "${OUTPUT_PATH}/${TIMESTAMP}_gps.log" &
 GPS_PID=$!
