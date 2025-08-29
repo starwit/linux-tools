@@ -67,13 +67,15 @@ def colorize_conclusion(conclusion):
     else:
         return conclusion
 
-def display_runs(all_runs):
+def display_runs(all_runs, show_urls=False):
     table = Table(title="Active GitHub Actions Runs")
     table.add_column("Repo", style="cyan", no_wrap=True)
     table.add_column("Started At", style="yellow")
     table.add_column("Title", style="blue", max_width=40)
     table.add_column("Status")
     table.add_column("Conclusion", justify="center")
+    if show_urls:
+        table.add_column("URL", style="dim", no_wrap=True)
 
     # Flatten all runs and sort by started_at
     all_runs_flat = []
@@ -101,13 +103,19 @@ def display_runs(all_runs):
             except:
                 pass
         
-        table.add_row(
+        row_data = [
             repo, 
             started_at,
             title, 
             colorize_status(status),
             colorize_conclusion(conclusion)
-        )
+        ]
+        
+        if show_urls:
+            url = run.get("html_url", "")
+            row_data.append(url)
+        
+        table.add_row(*row_data)
     console.print(table)
 
 def main():
@@ -116,6 +124,7 @@ def main():
     parser.add_argument("-t", "--token", help="GitHub access token (or set GITHUB_TOKEN)", default=os.getenv("GITHUB_TOKEN"))
     parser.add_argument("--include-completed-since-hours", type=int, default=8, help="Also show completed jobs from the last N hours")
     parser.add_argument("--fetch-all-repos", action='store_true', help="Do not filter repos for `pushed_at` and query all repos (will take longer)")
+    parser.add_argument("--show-urls", action='store_true', help="Show the GitHub Actions run URLs in the table")
     args = parser.parse_args()
 
     if not args.token:
@@ -158,7 +167,7 @@ def main():
                     all_runs[repo] = []
                 all_runs[repo].extend(runs)
     
-    display_runs(all_runs)
+    display_runs(all_runs, show_urls=args.show_urls)
 
 if __name__ == "__main__":
     main()

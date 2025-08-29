@@ -2,11 +2,28 @@
 
 A command-line tool to monitor GitHub Actions workflow runs across all repositories in an organization. Similar to the Unix `top` command, but for GitHub Actions.
 
+## Quick Start
+
+```bash
+# Install dependencies
+poetry install
+
+# Set your GitHub token
+export GITHUB_TOKEN=your_token_here
+
+# Monitor active workflow runs
+python main.py your-org-name
+
+# Include completed runs from last 8 hours with URLs
+python main.py your-org-name --include-completed-since-hours 8 --show-urls
+```
+
 ## Features
 
 - Lists all active (in-progress and queued) workflow runs across an organization
 - Displays runs sorted by start time (oldest first)
 - Color-coded status and conclusion columns for easy visual scanning
+- Optional URL column to quickly access workflow runs
 - Parallel API requests for fast data retrieval
 - Smart repository filtering to reduce API calls
 
@@ -55,6 +72,14 @@ Show completed runs from the last 24 hours:
 python main.py your-org-name --include-completed-since-hours 24
 ```
 
+### Show Workflow URLs
+
+Display clickable URLs for each workflow run:
+
+```bash
+python main.py your-org-name --show-urls
+```
+
 ### Fetch All Repositories
 
 By default, the tool filters repositories based on recent activity to reduce API calls. This excludes dependabot-triggered jobs. To check all repositories:
@@ -72,6 +97,7 @@ The tool displays a table with the following columns:
 - **Title**: Workflow run title (truncated if too long)
 - **Status**: Current status (blue for active, grey for completed)
 - **Conclusion**: Final result (green for success, red for failure, grey for cancelled)
+- **URL**: GitHub Actions run URL (only shown with `--show-urls`)
 
 ## Authentication
 
@@ -87,8 +113,8 @@ The tool makes parallel requests to improve performance but respects GitHub's AP
 # Monitor active runs only
 python main.py acme-corp
 
-# Include completed runs from last 12 hours
-python main.py acme-corp --include-completed-since-hours 12
+# Include completed runs from last 12 hours with URLs
+python main.py acme-corp --include-completed-since-hours 12 --show-urls
 
 # Check all repositories (slower but comprehensive)
 python main.py acme-corp --fetch-all-repos --include-completed-since-hours 6
