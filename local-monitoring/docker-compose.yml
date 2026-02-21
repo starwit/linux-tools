@@ -37,6 +37,7 @@ services:
   turbostat_exporter:
     image: ghcr.io/blackdark/prometheus_turbostat_exporter:main
     network_mode: host
+    restart: always
     privileged: true
     environment:
       TURBOSTAT_EXPORTER_DEFAULT_COLLECT_SECONDS: 1
