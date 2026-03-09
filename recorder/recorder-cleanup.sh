@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Load config file if present
-CONFIG_FILE="${JETSON_RECORDER_CONF:-/etc/jetson-recorder.conf}"
+CONFIG_FILE="${RECORDER_CONF:-/etc/recorder.conf}"
 if [ -f "${CONFIG_FILE}" ]; then
     # shellcheck source=/dev/null
     . "${CONFIG_FILE}"
