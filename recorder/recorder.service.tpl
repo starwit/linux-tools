@@ -1,12 +1,13 @@
 [Unit]
-Description=Jetson Recorder Service
+Description=Recorder Service
 After=multi-user.target
 After=time-sync.target
 Wants=time-sync.target
 
 [Service]
 Type=simple
-ExecStart=/bin/bash /opt/jetson-recorder/jetson-recorder.sh
+ExecStartPre=/bin/bash /opt/recorder/recorder-cleanup.sh
+ExecStart=/bin/bash /opt/recorder/recorder.sh
 Restart=always
 RestartSec=2
 StartLimitBurst=20
